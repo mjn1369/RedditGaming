@@ -1,10 +1,10 @@
 package apps.mjn.domain.entity
 
 data class RedditPostList (
-    val data: RedditPostListItem
+    val data: RedditPostListData
 )
 
-data class RedditPostListItem (
+data class RedditPostListData (
     val dist: Int?,
     val children: List<RedditPostContainer>,
     val after: String?
