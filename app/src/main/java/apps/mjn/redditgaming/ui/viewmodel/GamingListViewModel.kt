@@ -1,4 +1,4 @@
-package apps.mjn.redditgaming.ui.splash
+package apps.mjn.redditgaming.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,5 +31,9 @@ class GamingListViewModel @Inject constructor(private val getRedditListUseCase: 
 
     private fun error(throwable: Throwable) {
         data.value = Resource(ResourceState.ERROR, failure = throwable)
+    }
+
+    fun getNextPageTag(): String {
+        return data.value?.data?.data?.nextPageTag ?: ""
     }
 }

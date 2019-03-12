@@ -1,35 +1,38 @@
-package apps.mjn.redditgaming.ui.splash
+package apps.mjn.redditgaming.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
+import android.widget.Toast
 import apps.mjn.domain.entity.RedditPostList
 import apps.mjn.redditgaming.R
 import apps.mjn.redditgaming.extension.createViewModel
 import apps.mjn.redditgaming.extension.observe
 import apps.mjn.redditgaming.ui.base.BaseActivity
-import apps.mjn.redditgaming.ui.main.MainActivity
 import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.activity_main.*
 
-class SplashActivity : BaseActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: GamingListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_main)
         viewModel = createViewModel(viewModelFactory) {
             observe(getData(), ::handleStates)
         }
-        loadData()
+        initList(viewModel.getData().value?.data)
     }
 
-    private fun loadData() {
-        viewModel.load()
+    private fun initList(list: RedditPostList?){
+        Toast.makeText(this, list?.data?.posts?.get(0)?.data?.title, Toast.LENGTH_LONG).show()
+    }
+
+    private fun loadData(){
+        viewModel.load(viewModel.getNextPageTag())
     }
 
     private fun handleStates(resource: Resource<RedditPostList>?) {
@@ -44,8 +47,7 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun handleSuccess(list: RedditPostList) {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        Toast.makeText(this, list.data.posts[0].data?.title, Toast.LENGTH_LONG).show()
     }
 
     private fun handleError(failure: Throwable) {

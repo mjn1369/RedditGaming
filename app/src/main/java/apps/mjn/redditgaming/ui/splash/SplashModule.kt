@@ -5,11 +5,13 @@ import apps.mjn.data.datasource.RedditListRemoteDataSource
 import apps.mjn.data.repository.RedditListRepositoryImpl
 import apps.mjn.domain.repository.RedditListRepository
 import apps.mjn.redditgaming.di.annotation.ViewModelKey
+import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import apps.mjn.remote.datasource.RedditListRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
+import javax.inject.Singleton
 
 @Module
 abstract class SplashModule {
@@ -18,6 +20,7 @@ abstract class SplashModule {
     internal abstract fun splashActivity(): SplashActivity
 
     @Binds
+    @Singleton
     @IntoMap
     @ViewModelKey(GamingListViewModel::class)
     abstract fun bindGamingListViewModel(gamingListViewModel: GamingListViewModel): ViewModel

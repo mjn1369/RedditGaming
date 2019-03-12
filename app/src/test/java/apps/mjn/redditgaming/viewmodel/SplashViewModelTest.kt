@@ -7,7 +7,7 @@ import apps.mjn.domain.interactor.GetRedditListUseCase
 import apps.mjn.redditgaming.RedditPostListFactory
 import apps.mjn.redditgaming.RedditPostListFactory.Factory.COUNT
 import apps.mjn.redditgaming.ui.model.ResourceState
-import apps.mjn.redditgaming.ui.splash.GamingListViewModel
+import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import io.mockk.*
 import org.junit.Before
 import org.junit.Rule
@@ -22,7 +22,8 @@ class SplashViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val getRedditListUseCase: GetRedditListUseCase = mockk(relaxed = true)
-    private val viewModel: GamingListViewModel = GamingListViewModel(getRedditListUseCase)
+    private val viewModel: GamingListViewModel =
+        GamingListViewModel(getRedditListUseCase)
 
     @Before
     fun setup() {
