@@ -20,9 +20,9 @@ class SplashViewModel @Inject constructor(private val redditListUseCase: GetRedd
 
     fun getData(): LiveData<Resource<RedditPostList>> = data
 
-    fun load(nextPageTag: String) {
+    fun load() {
         data.value = Resource(ResourceState.LOADING)
-        redditListUseCase.execute(GetRedditListUseCase.Params(nextPageTag), ::success, ::error)
+        redditListUseCase.execute(GetRedditListUseCase.Params(), ::success, ::error)
     }
 
     private fun success(list: RedditPostList) {
