@@ -6,6 +6,7 @@ import apps.mjn.domain.failure.Failure
 import apps.mjn.domain.interactor.GetRedditListUseCase
 import apps.mjn.redditgaming.RedditPostListFactory
 import apps.mjn.redditgaming.RedditPostListFactory.Factory.COUNT
+import apps.mjn.redditgaming.extension.toRedditPostListItem
 import apps.mjn.redditgaming.ui.model.ResourceState
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import io.mockk.*
@@ -63,7 +64,7 @@ class SplashViewModelTest {
 
         viewModel.load()
         assert(viewModel.getData().value?.resourceState == ResourceState.SUCCESS)
-        assert(viewModel.getData().value?.data == list)
+        assert(viewModel.getData().value?.data == list.toRedditPostListItem())
     }
 
     @Test
