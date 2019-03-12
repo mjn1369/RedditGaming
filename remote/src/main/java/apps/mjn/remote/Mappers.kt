@@ -1,4 +1,4 @@
-package apps.mjn.remote.dtopackage
+package apps.mjn.remote
 
 import apps.mjn.domain.entity.RedditPost
 import apps.mjn.domain.entity.RedditPostContainer
@@ -19,4 +19,4 @@ fun RedditPostContainerDTO.toRedditPostContainer() =
     RedditPostContainer(data?.toRedditPost())
 
 fun RedditPostDTO.toRedditPost() =
-    RedditPost(title, score, subreddit, permalink)
+    RedditPost(title, score, subreddit, "${RemoteConstants.BASE_URL}${permalink?.substring(1)}")
