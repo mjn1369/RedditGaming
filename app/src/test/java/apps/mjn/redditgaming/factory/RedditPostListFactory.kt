@@ -1,11 +1,11 @@
-package apps.mjn.data.factory
+package apps.mjn.redditgaming
 
-import apps.mjn.data.factory.DataFactory.Factory.randomLong
-import apps.mjn.data.factory.DataFactory.Factory.randomString
 import apps.mjn.domain.entity.RedditPost
 import apps.mjn.domain.entity.RedditPostContainer
 import apps.mjn.domain.entity.RedditPostList
 import apps.mjn.domain.entity.RedditPostListData
+import apps.mjn.redditgaming.factory.DataFactory.Factory.randomLong
+import apps.mjn.redditgaming.factory.DataFactory.Factory.randomString
 
 internal class RedditPostListFactory {
 

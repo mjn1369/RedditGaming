@@ -3,7 +3,7 @@ package apps.mjn.remote.mapper
 import apps.mjn.domain.entity.RedditPostList
 import apps.mjn.remote.dto.RedditPostListDTO
 import apps.mjn.remote.factory.RedditPostListFactory
-import apps.mjn.remote.factory.RedditPostListFactory.Factory.DIST
+import apps.mjn.remote.factory.RedditPostListFactory.Factory.COUNT
 import apps.mjn.remote.toRedditPostContainer
 import apps.mjn.remote.toRedditPostList
 import apps.mjn.remote.toRedditPostListData
@@ -14,7 +14,7 @@ class MappersTest {
 
     @Test
     fun `RedditPostListDto map to RedditPostList`() {
-        val redditPostListDTO: RedditPostListDTO = RedditPostListFactory.makeRedditPostListDTO(DIST)
+        val redditPostListDTO: RedditPostListDTO = RedditPostListFactory.makeRedditPostListDTO(COUNT)
         val redditPostList: RedditPostList = redditPostListDTO.toRedditPostList()
 
         Assert.assertEquals(redditPostListDTO.data.toRedditPostListData(), redditPostList.data)

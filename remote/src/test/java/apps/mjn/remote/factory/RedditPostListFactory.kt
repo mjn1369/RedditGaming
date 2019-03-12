@@ -15,14 +15,14 @@ internal class RedditPostListFactory {
 
     companion object Factory {
         const val AFTER = ""
-        const val DIST = 25
+        const val COUNT = 25
 
         fun makeRedditPostList(postCount: Int): RedditPostList {
             val postContainers = mutableListOf<RedditPostContainer>()
             repeat(postCount) {
                 postContainers.add(makePostContainer())
             }
-            return RedditPostList(makePostListData(DIST, postContainers, AFTER))
+            return RedditPostList(makePostListData(COUNT, postContainers, AFTER))
         }
 
         fun makeRedditPostListDTO(postCount: Int): RedditPostListDTO {
@@ -30,7 +30,7 @@ internal class RedditPostListFactory {
             repeat(postCount) {
                 postContainers.add(makePostContainerDTO())
             }
-            return RedditPostListDTO(makePostListDataDTO(DIST, postContainers, AFTER))
+            return RedditPostListDTO(makePostListDataDTO(COUNT, postContainers, AFTER))
         }
 
         private fun makePostListData(dist: Int, children: List<RedditPostContainer>, after: String) = RedditPostListData(

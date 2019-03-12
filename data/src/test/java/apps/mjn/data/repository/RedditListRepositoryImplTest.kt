@@ -7,7 +7,7 @@ import io.mockk.clearAllMocks
 import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test
-import apps.mjn.data.factory.RedditPostListFactory.Factory.DIST
+import apps.mjn.data.factory.RedditPostListFactory.Factory.COUNT
 import io.mockk.every
 import io.reactivex.Single
 
@@ -23,7 +23,7 @@ class RedditListRepositoryImplTest {
 
     @Test
     fun `getList returns data`() {
-        val list = RedditPostListFactory.makeRedditPostList(DIST)
+        val list = RedditPostListFactory.makeRedditPostList(COUNT)
         every { dataSource.getList(AFTER) } returns Single.just(list)
         val successObserver = repository.getList(AFTER).test()
         with(successObserver) {

@@ -4,7 +4,7 @@ import apps.mjn.domain.entity.RedditPostList
 import apps.mjn.domain.executer.PostExecutionThread
 import apps.mjn.domain.executer.UseCaseExecutor
 import apps.mjn.domain.factory.RedditPostListFactory.Factory.AFTER
-import apps.mjn.domain.factory.RedditPostListFactory.Factory.DIST
+import apps.mjn.domain.factory.RedditPostListFactory.Factory.COUNT
 import apps.mjn.domain.factory.RedditPostListFactory.Factory.makeRedditPostList
 import apps.mjn.domain.interactor.GetRedditListUseCase
 import apps.mjn.domain.repository.RedditListRepository
@@ -52,12 +52,12 @@ class GetRedditListUseCaseTest {
 
     @Test
     fun `repository returns data`() {
-        val list = makeRedditPostList(DIST)
+        val list = makeRedditPostList(COUNT)
         mockGetListResponse(list)
         usecase.buildSingle(params).test().assertValue(list)
     }
 
-    private fun mockGetListResponse(list: RedditPostList = makeRedditPostList(DIST)) {
+    private fun mockGetListResponse(list: RedditPostList = makeRedditPostList(COUNT)) {
         every { repository.getList(any()) } returns Single.just(list)
     }
 }
