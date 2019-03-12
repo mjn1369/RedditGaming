@@ -1,7 +1,8 @@
-package apps.mjn.redditgaming
+package apps.mjn.redditgaming.ui.splash
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import apps.mjn.redditgaming.R
 
 class SplashActivity : AppCompatActivity() {
 
