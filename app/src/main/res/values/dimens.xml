@@ -14,6 +14,9 @@
     <!-- Splash Screen -->
     <dimen name="splash_logo">128dp</dimen>
 
+    <!-- Main Screen -->
+    <dimen name="loading_height">@dimen/space_small</dimen>
+
     <!-- Post Item -->
     <dimen name="radius_post_item">@dimen/space_small</dimen>
 

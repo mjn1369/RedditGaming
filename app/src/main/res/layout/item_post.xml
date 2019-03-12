@@ -23,6 +23,7 @@
                 android:layout_marginTop="@dimen/space_normal"
                 android:gravity="left"
                 android:layout_marginRight="@dimen/space_normal"
+                style="@style/TextPostItemScore"
                 app:layout_constraintTop_toBottomOf="@+id/tvPostItemTitle"
                 app:layout_constraintLeft_toLeftOf="@+id/tvPostItemTitle"
                 app:layout_constraintRight_toLeftOf="@+id/tvPostItemSubReddit"
@@ -32,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
+                style="@style/TextPostItemSubReddit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/tvPostItemScore"
                 app:layout_constraintRight_toRightOf="parent"/>
