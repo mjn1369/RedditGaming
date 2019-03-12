@@ -11,7 +11,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import javax.inject.Singleton
 
 @Module
 abstract class SplashModule {
@@ -20,7 +19,6 @@ abstract class SplashModule {
     internal abstract fun splashActivity(): SplashActivity
 
     @Binds
-    @Singleton
     @IntoMap
     @ViewModelKey(GamingListViewModel::class)
     abstract fun bindGamingListViewModel(gamingListViewModel: GamingListViewModel): ViewModel

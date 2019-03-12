@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
 import apps.mjn.domain.entity.RedditPostList
+import apps.mjn.redditgaming.ARG_LIST
 import apps.mjn.redditgaming.R
 import apps.mjn.redditgaming.extension.createViewModel
 import apps.mjn.redditgaming.extension.observe
+import apps.mjn.redditgaming.extension.toRedditPostListItem
 import apps.mjn.redditgaming.ui.base.BaseActivity
 import apps.mjn.redditgaming.ui.main.MainActivity
 import apps.mjn.redditgaming.ui.model.Resource
@@ -44,7 +46,9 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun handleSuccess(list: RedditPostList) {
-        startActivity(Intent(this, MainActivity::class.java))
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(ARG_LIST, list.toRedditPostListItem())
+        startActivity(intent)
         finish()
     }
 

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.Toast
 import apps.mjn.domain.entity.RedditPostList
+import apps.mjn.domain.entity.RedditPostListItem
+import apps.mjn.redditgaming.ARG_LIST
 import apps.mjn.redditgaming.R
 import apps.mjn.redditgaming.extension.createViewModel
 import apps.mjn.redditgaming.extension.observe
@@ -24,10 +26,11 @@ class MainActivity : BaseActivity() {
         viewModel = createViewModel(viewModelFactory) {
             observe(getData(), ::handleStates)
         }
-        initList(viewModel.getData().value?.data)
+        initList()
     }
 
-    private fun initList(list: RedditPostList?){
+    private fun initList(){
+        var list = intent.getParcelableExtra(ARG_LIST) as RedditPostListItem
         Toast.makeText(this, list?.data?.posts?.get(0)?.data?.title, Toast.LENGTH_LONG).show()
     }
 
@@ -38,8 +41,7 @@ class MainActivity : BaseActivity() {
     private fun handleStates(resource: Resource<RedditPostList>?) {
         resource?.let {
             when (resource.resourceState) {
-                ResourceState.LOADING -> {
-                }
+                ResourceState.LOADING -> {}
                 ResourceState.SUCCESS -> handleSuccess(resource.data!!)
                 ResourceState.ERROR -> handleError(resource.failure!!)
             }
