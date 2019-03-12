@@ -20,9 +20,9 @@ class GamingListViewModel @Inject constructor(private val getRedditListUseCase: 
 
     fun getData(): LiveData<Resource<RedditPostList>> = data
 
-    fun load() {
+    fun load(nextPageTag: String = "") {
         data.value = Resource(ResourceState.LOADING)
-        getRedditListUseCase.execute(GetRedditListUseCase.Params(), ::success, ::error)
+        getRedditListUseCase.execute(GetRedditListUseCase.Params(nextPageTag), ::success, ::error)
     }
 
     private fun success(list: RedditPostList) {
