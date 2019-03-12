@@ -10,7 +10,7 @@ class VerticalSpaceItemDecoration(private val space: Int) : RecyclerView.ItemDec
         parent: RecyclerView, state: RecyclerView.State
     ) {
         with(outRect) {
-            if (parent.getChildAdapterPosition(view) < parent.childCount - 1) {
+            if (parent.getChildAdapterPosition(view) != parent.adapter!!.itemCount - 1) {
                 bottom = space
             }
         }

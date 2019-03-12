@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RedditPostListDTO (
     @SerializedName("data")
-    val data: RedditPostListDataDTO
+    val data: RedditPostListDataDTO?
 )
 
 data class RedditPostListDataDTO (

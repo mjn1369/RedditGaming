@@ -10,7 +10,7 @@ import apps.mjn.remote.dto.RedditPostListDTO
 import apps.mjn.remote.dto.RedditPostListDataDTO
 
 fun RedditPostListDTO.toRedditPostList() =
-    RedditPostList(data.toRedditPostListData())
+    RedditPostList(data?.toRedditPostListData())
 
 fun RedditPostListDataDTO.toRedditPostListData() =
     RedditPostListData(dist, children.map { it.toRedditPostContainer() }, after)

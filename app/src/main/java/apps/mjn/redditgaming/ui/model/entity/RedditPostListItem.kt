@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class RedditPostListItem (
-    val data: RedditPostListDataItem
+    val data: RedditPostListDataItem?
 ): Parcelable
 
 @Parcelize

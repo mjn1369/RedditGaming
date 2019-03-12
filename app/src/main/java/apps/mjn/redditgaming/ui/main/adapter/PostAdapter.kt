@@ -16,9 +16,11 @@ class PostAdapter(private var postItems: ArrayList<RedditPostItem>) : RecyclerVi
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) =
         holder.bind(postItems[position])
 
-    fun addItems(items: List<RedditPostItem>){
-        postItems.addAll(items)
-        notifyItemRangeInserted(itemCount - items.size, itemCount)
+    fun addItems(items: List<RedditPostItem>?){
+        items?.let {
+            postItems.addAll(items)
+            notifyItemRangeInserted(itemCount - items.size, itemCount)
+        }
     }
 
     override fun getItemCount() = postItems.size

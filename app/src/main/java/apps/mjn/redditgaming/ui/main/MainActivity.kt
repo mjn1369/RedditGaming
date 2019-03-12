@@ -1,15 +1,22 @@
 package apps.mjn.redditgaming.ui.main
 
 import android.os.Bundle
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import apps.mjn.domain.entity.RedditPostItem
 import apps.mjn.domain.entity.RedditPostList
 import apps.mjn.domain.entity.RedditPostListItem
 import apps.mjn.redditgaming.ARG_LIST
 import apps.mjn.redditgaming.R
 import apps.mjn.redditgaming.extension.createViewModel
 import apps.mjn.redditgaming.extension.observe
+import apps.mjn.redditgaming.extension.toRedditPostListItem
 import apps.mjn.redditgaming.ui.base.BaseActivity
+import apps.mjn.redditgaming.ui.main.adapter.PostAdapter
+import apps.mjn.redditgaming.ui.main.adapter.VerticalSpaceItemDecoration
 import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
@@ -19,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: GamingListViewModel
+    var postAdapter = PostAdapter(ArrayList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,30 +37,48 @@ class MainActivity : BaseActivity() {
         initList()
     }
 
-    private fun initList(){
-        var list = intent.getParcelableExtra(ARG_LIST) as RedditPostListItem
-        Toast.makeText(this, list?.data?.posts?.get(0)?.data?.title, Toast.LENGTH_LONG).show()
+    private fun initList() {
+        rvPosts.addItemDecoration(VerticalSpaceItemDecoration(resources.getDimensionPixelSize(R.dimen.space_small)))
+        val list = intent.getParcelableExtra(ARG_LIST) as RedditPostListItem?
+        rvPosts.adapter = postAdapter
+        list?.let {
+            addToList(list.data?.posts?.mapNotNull { it.data })
+        } ?: loadData()
     }
 
-    private fun loadData(){
-        viewModel.load(viewModel.getNextPageTag())
+    private fun addToList(items: List<RedditPostItem>?) {
+        postAdapter.addItems(items)
     }
 
-    private fun handleStates(resource: Resource<RedditPostList>?) {
+    private fun loadData() {
+        viewModel.load()
+    }
+
+    private fun handleStates(resource: Resource<RedditPostListItem>?) {
         resource?.let {
             when (resource.resourceState) {
-                ResourceState.LOADING -> {}
+                ResourceState.LOADING -> showLoading()
                 ResourceState.SUCCESS -> handleSuccess(resource.data!!)
                 ResourceState.ERROR -> handleError(resource.failure!!)
             }
         }
     }
 
-    private fun handleSuccess(list: RedditPostList) {
-        Toast.makeText(this, list.data.posts[0].data?.title, Toast.LENGTH_LONG).show()
+    private fun showLoading(){
+        loadingPosts.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading(){
+        loadingPosts.visibility = View.GONE
+    }
+
+    private fun handleSuccess(list: RedditPostListItem) {
+        hideLoading()
+        addToList(list.data?.posts?.mapNotNull { it.data })
     }
 
     private fun handleError(failure: Throwable) {
+        hideLoading()
         showSnackBar(failure.message) { loadData() }
     }
 

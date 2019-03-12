@@ -21,8 +21,10 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
+            android:id="@+id/loadingPosts"
             android:layout_width="match_parent"
             android:layout_height="@dimen/loading_height"
+            android:visibility="gone"
             style="@style/HorizontalProgressBar"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

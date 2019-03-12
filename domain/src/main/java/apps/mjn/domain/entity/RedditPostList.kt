@@ -1,7 +1,7 @@
 package apps.mjn.domain.entity
 
 data class RedditPostList (
-    val data: RedditPostListData
+    val data: RedditPostListData?
 )
 
 data class RedditPostListData (

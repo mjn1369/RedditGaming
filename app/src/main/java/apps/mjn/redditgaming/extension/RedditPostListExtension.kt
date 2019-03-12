@@ -4,7 +4,7 @@ import apps.mjn.domain.entity.*
 
 fun RedditPostList.toRedditPostListItem() =
         RedditPostListItem(
-            data.toRedditPostListDataItem()
+            data?.toRedditPostListDataItem()
         )
 
 fun RedditPostListData.toRedditPostListDataItem() =
