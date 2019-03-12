@@ -15,7 +15,6 @@ class GamingListViewModel @Inject constructor(private val getRedditListUseCase: 
     BaseViewModel() {
 
     private val data: MutableLiveData<Resource<RedditPostListItem>> = MutableLiveData()
-    private var nextPageTag: String = ""
 
     init {
         useCases += getRedditListUseCase
@@ -23,14 +22,13 @@ class GamingListViewModel @Inject constructor(private val getRedditListUseCase: 
 
     fun getData(): LiveData<Resource<RedditPostListItem>> = data
 
-    fun load() {
+    fun load(nextPageTag: String = "") {
         data.value = Resource(ResourceState.LOADING)
         getRedditListUseCase.execute(GetRedditListUseCase.Params(nextPageTag), ::success, ::error)
     }
 
     private fun success(list: RedditPostList) {
         data.value = Resource(ResourceState.SUCCESS, list.toRedditPostListItem())
-        nextPageTag = list.data?.nextPageTag ?: ""
     }
 
     private fun error(throwable: Throwable) {

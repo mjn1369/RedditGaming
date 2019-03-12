@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: GamingListViewModel
+    private var nextPageTag: String = ""
     var postAdapter = PostAdapter(ArrayList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,7 @@ class MainActivity : BaseActivity() {
         val list = intent.getParcelableExtra(ARG_LIST) as RedditPostListItem?
         rvPosts.adapter = postAdapter
         list?.let {
+            nextPageTag = list.data?.nextPageTag ?: ""
             addToList(list.data?.posts?.mapNotNull { it.data })
         } ?: loadData()
     }
@@ -51,7 +53,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadData() {
-        viewModel.load()
+        viewModel.load(nextPageTag)
     }
 
     private fun handleStates(resource: Resource<RedditPostListItem>?) {
