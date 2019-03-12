@@ -5,7 +5,7 @@ data class RedditPostList (
 )
 
 data class RedditPostListData (
-    val dist: Int?,
-    val children: List<RedditPostContainer>,
-    val after: String?
+    val childCount: Int?,
+    val posts: List<RedditPostContainer>,
+    val nextPageTag: String?
 )
