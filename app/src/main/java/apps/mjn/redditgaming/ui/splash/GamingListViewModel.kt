@@ -9,20 +9,20 @@ import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
 import javax.inject.Inject
 
-class SplashViewModel @Inject constructor(private val redditListUseCase: GetRedditListUseCase) :
+class GamingListViewModel @Inject constructor(private val getRedditListUseCase: GetRedditListUseCase) :
     BaseViewModel() {
 
     private val data: MutableLiveData<Resource<RedditPostList>> = MutableLiveData()
 
     init {
-        useCases += redditListUseCase
+        useCases += getRedditListUseCase
     }
 
     fun getData(): LiveData<Resource<RedditPostList>> = data
 
     fun load() {
         data.value = Resource(ResourceState.LOADING)
-        redditListUseCase.execute(GetRedditListUseCase.Params(), ::success, ::error)
+        getRedditListUseCase.execute(GetRedditListUseCase.Params(), ::success, ::error)
     }
 
     private fun success(list: RedditPostList) {
