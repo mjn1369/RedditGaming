@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_normal">16dp</dimen>
+    <dimen name="space_large">32dp</dimen>
+
+    <dimen name="tv_small">10sp</dimen>
+    <dimen name="tv_normal">14sp</dimen>
+    <dimen name="tv_large">18sp</dimen>
+
+    <dimen name="splash_logo">128dp</dimen>
+</resources>
