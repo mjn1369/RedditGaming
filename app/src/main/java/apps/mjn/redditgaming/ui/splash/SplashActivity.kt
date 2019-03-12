@@ -1,15 +1,17 @@
 package apps.mjn.redditgaming.ui.splash
 
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.Toast
 import apps.mjn.domain.entity.RedditPostList
-import apps.mjn.domain.failure.Failure
 import apps.mjn.redditgaming.R
 import apps.mjn.redditgaming.extension.createViewModel
 import apps.mjn.redditgaming.extension.observe
 import apps.mjn.redditgaming.ui.base.BaseActivity
 import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity() {
 
@@ -24,14 +26,15 @@ class SplashActivity : BaseActivity() {
         loadData()
     }
 
-    private fun loadData(){
+    private fun loadData() {
         viewModel.load()
     }
 
     private fun handleStates(resource: Resource<RedditPostList>?) {
         resource?.let {
             when (resource.resourceState) {
-                ResourceState.LOADING -> {}
+                ResourceState.LOADING -> {
+                }
                 ResourceState.SUCCESS -> handleSuccess(resource.data!!)
                 ResourceState.ERROR -> handleError(resource.failure!!)
             }
@@ -43,6 +46,18 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun handleError(failure: Throwable) {
-        Toast.makeText(this, failure.message, Toast.LENGTH_LONG).show()
+        showSnackBar(failure.message) { loadData() }
+    }
+
+    private fun showSnackBar(message: String?, action: () -> Unit) {
+        message?.let {
+            Snackbar.make(parentLayout, message, Snackbar.LENGTH_INDEFINITE).apply {
+                view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
+                    setAction(getString(R.string.try_again)) {
+                        action()
+                    }
+                }
+            }.show()
+        }
     }
 }
