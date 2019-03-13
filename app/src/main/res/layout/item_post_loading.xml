@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_2x">
+    <ProgressBar
+            android:id="@+id/loadingPostItem"
+            android:layout_width="@dimen/loading_post_item"
+            android:layout_height="@dimen/loading_post_item"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tvLoadingPostItem"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+    <TextView
+            android:id="@+id/tvLoadingPostItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading"
+            android:layout_marginLeft="@dimen/space_1x"
+            style="@style/TextPostItemLoading"
+            app:layout_constraintTop_toTopOf="@+id/loadingPostItem"
+            app:layout_constraintBottom_toBottomOf="@+id/loadingPostItem"
+            app:layout_constraintLeft_toRightOf="@+id/loadingPostItem"
+            app:layout_constraintRight_toRightOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

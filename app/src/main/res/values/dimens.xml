@@ -20,5 +20,6 @@
 
     <!-- Post Item -->
     <dimen name="radius_post_item">@dimen/space_1x</dimen>
+    <dimen name="loading_post_item">@dimen/space_4x</dimen>
 
 </resources>

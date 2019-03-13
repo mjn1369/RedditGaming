@@ -32,6 +32,8 @@ class MainActivity : BaseActivity() {
     private var postAdapter = PostAdapter(ArrayList()) {
         onPostClick(it)
     }
+    private val loadMoreThreshold = 10
+    private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +51,11 @@ class MainActivity : BaseActivity() {
         list?.let { postItem ->
             nextPageTag = postItem.data?.nextPageTag ?: ""
             addToList(postItem.data?.posts?.mapNotNull { it.data })
-        } ?: loadData()
-        rvPosts.addOnScrollListener(InfiniteLinearScrollListener(5, rvPosts.layoutManager as LinearLayoutManager) {
-            loadMore()
+        } ?: loadMore()
+        rvPosts.addOnScrollListener(InfiniteLinearScrollListener(loadMoreThreshold, rvPosts.layoutManager as LinearLayoutManager) {
+            if(!isLoading) {
+                loadMore()
+            }
         })
     }
 
@@ -59,13 +63,9 @@ class MainActivity : BaseActivity() {
         postAdapter.addItems(items)
     }
 
-    private fun loadData() {
-        viewModel.load(nextPageTag)
-    }
-
     private fun loadMore() {
-        showLoading()
-        loadData()
+        isLoading = true
+        viewModel.load(nextPageTag)
     }
 
     private fun onPostClick(redditPostItem: RedditPostItem) {
@@ -105,22 +105,24 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showLoading() {
-        loadingPosts.visibility = View.VISIBLE
+        postAdapter.showLoading()
     }
 
     private fun hideLoading() {
-        loadingPosts.visibility = View.GONE
+        postAdapter.hideLoading()
     }
 
     private fun handleSuccess(list: RedditPostListItem) {
+        isLoading = false
         hideLoading()
         addToList(list.data?.posts?.mapNotNull { it.data })
         nextPageTag = list.data?.nextPageTag ?: ""
     }
 
     private fun handleError(failure: Throwable) {
+        isLoading = false
         hideLoading()
-        showSnackBar(failure.message) { loadData() }
+        showSnackBar(failure.message) { loadMore() }
     }
 
     private fun showSnackBar(message: String?, action: () -> Unit) {
