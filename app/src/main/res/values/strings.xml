@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Reddit r/Gaming</string>
     <string name="try_again">Try Again</string>
+    <string name="link_not_found">This post doesn\'t have a link</string>
+    <string name="link_not_correct">Cannot open this post</string>
+    <string name="browser_not_found">Your device doesn\'t have a browser to open the post</string>
 </resources>

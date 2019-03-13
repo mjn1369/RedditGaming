@@ -23,12 +23,16 @@ import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import apps.mjn.redditgaming.util.recyclerview.InfiniteLinearScrollListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import android.content.Intent
+import android.net.Uri
+import java.lang.Exception
+
 
 class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: GamingListViewModel
     private var nextPageTag: String = ""
-    var postAdapter = PostAdapter(ArrayList()) {
+    private var postAdapter = PostAdapter(ArrayList()) {
         onPostClick(it)
     }
 
@@ -68,7 +72,29 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onPostClick(redditPostItem: RedditPostItem) {
-        Toast.makeText(this, "Clicked on ${redditPostItem.title}", Toast.LENGTH_LONG).show()
+        openPostInBrowser(redditPostItem.permanentLink)
+    }
+
+    private fun openPostInBrowser(link: String?){
+        val https = "https://"
+        val http = "http://"
+        var finalLink = link
+        link?.let {
+            if (!link.startsWith(http) && !link.startsWith(https)) {
+                finalLink = http + link
+            }
+            var intent: Intent? = null
+            try {
+                intent = Intent(Intent.ACTION_VIEW, Uri.parse(finalLink))
+            } catch (e: Exception){
+                Toast.makeText(this, getString(R.string.link_not_correct) ,Toast.LENGTH_LONG).show()
+            }
+            if (intent?.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, getString(R.string.browser_not_found) ,Toast.LENGTH_LONG).show()
+            }
+        } ?: Toast.makeText(this, getString(R.string.link_not_found) ,Toast.LENGTH_LONG).show()
     }
 
     private fun handleStates(resource: Resource<RedditPostListItem>?) {
