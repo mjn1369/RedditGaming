@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import apps.mjn.domain.entity.RedditPostItem
 import apps.mjn.redditgaming.R
 
-class PostAdapter(private var postItems: ArrayList<RedditPostItem>) : RecyclerView.Adapter<PostViewHolder>() {
+class PostAdapter(private var postItems: ArrayList<RedditPostItem>, private val onItemClick: (RedditPostItem)->(Unit)) : RecyclerView.Adapter<PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
@@ -14,7 +14,7 @@ class PostAdapter(private var postItems: ArrayList<RedditPostItem>) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) =
-        holder.bind(postItems[position])
+        holder.bind(postItems[position], onItemClick)
 
     fun addItems(items: List<RedditPostItem>?){
         items?.let {

@@ -28,7 +28,9 @@ class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: GamingListViewModel
     private var nextPageTag: String = ""
-    var postAdapter = PostAdapter(ArrayList())
+    var postAdapter = PostAdapter(ArrayList()) {
+        onPostClick(it)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +49,7 @@ class MainActivity : BaseActivity() {
             nextPageTag = postItem.data?.nextPageTag ?: ""
             addToList(postItem.data?.posts?.mapNotNull { it.data })
         } ?: loadData()
-        rvPosts.addOnScrollListener(InfiniteLinearScrollListener(5, rvPosts.layoutManager as LinearLayoutManager){
+        rvPosts.addOnScrollListener(InfiniteLinearScrollListener(5, rvPosts.layoutManager as LinearLayoutManager) {
             loadMore()
         })
     }
@@ -60,9 +62,13 @@ class MainActivity : BaseActivity() {
         viewModel.load(nextPageTag)
     }
 
-    private fun loadMore(){
+    private fun loadMore() {
         showLoading()
         loadData()
+    }
+
+    private fun onPostClick(redditPostItem: RedditPostItem) {
+        Toast.makeText(this, "Clicked on ${redditPostItem.title}", Toast.LENGTH_LONG).show()
     }
 
     private fun handleStates(resource: Resource<RedditPostListItem>?) {
