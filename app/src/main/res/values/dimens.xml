@@ -5,6 +5,7 @@
     <dimen name="space_0_5x">4dp</dimen>
     <dimen name="space_1x">8dp</dimen>
     <dimen name="space_2x">16dp</dimen>
+    <dimen name="space_3x">24dp</dimen>
     <dimen name="space_4x">32dp</dimen>
 
     <!-- Text Size -->
@@ -20,6 +21,6 @@
 
     <!-- Post Item -->
     <dimen name="radius_post_item">@dimen/space_1x</dimen>
-    <dimen name="loading_post_item">@dimen/space_4x</dimen>
+    <dimen name="loading_post_item">@dimen/space_3x</dimen>
 
 </resources>

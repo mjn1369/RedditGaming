@@ -1,8 +1,8 @@
 package apps.mjn.redditgaming.ui.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.View
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import apps.mjn.domain.entity.RedditPostItem
@@ -18,22 +18,16 @@ import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import apps.mjn.redditgaming.util.recyclerview.InfiniteLinearScrollListener
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
-import android.content.Intent
-import android.net.Uri
-import java.lang.Exception
-
 
 class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: GamingListViewModel
     private var nextPageTag: String = ""
-    private var postAdapter = PostAdapter(ArrayList()) {
-        onPostClick(it)
-    }
     private val loadMoreThreshold = 10
     private var isLoading = false
+    private var isFailed = false
+    private lateinit var postAdapter: PostAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +35,21 @@ class MainActivity : BaseActivity() {
         viewModel = createViewModel(viewModelFactory) {
             observe(getData(), ::handleStates)
         }
+        initAdapter()
         initList()
+    }
+
+    private fun initAdapter(){
+        postAdapter = PostAdapter(
+            ArrayList(),
+            {
+                onPostClick(it)
+            },
+            {
+                hideFailed()
+                loadMore()
+            }
+        )
     }
 
     private fun initList() {
@@ -52,11 +60,15 @@ class MainActivity : BaseActivity() {
             nextPageTag = postItem.data?.nextPageTag ?: ""
             addToList(postItem.data?.posts?.mapNotNull { it.data })
         } ?: loadMore()
-        rvPosts.addOnScrollListener(InfiniteLinearScrollListener(loadMoreThreshold, rvPosts.layoutManager as LinearLayoutManager) {
-            if(!isLoading) {
-                loadMore()
-            }
-        })
+        rvPosts.addOnScrollListener(
+            InfiniteLinearScrollListener(
+                loadMoreThreshold,
+                rvPosts.layoutManager as LinearLayoutManager
+            ) {
+                if (!isLoading && !isFailed) {
+                    loadMore()
+                }
+            })
     }
 
     private fun addToList(items: List<RedditPostItem>?) {
@@ -64,7 +76,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadMore() {
-        isLoading = true
         viewModel.load(nextPageTag)
     }
 
@@ -105,35 +116,34 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showLoading() {
+        isLoading = true
         postAdapter.showLoading()
     }
 
     private fun hideLoading() {
+        isLoading = false
         postAdapter.hideLoading()
     }
 
     private fun handleSuccess(list: RedditPostListItem) {
-        isLoading = false
         hideLoading()
         addToList(list.data?.posts?.mapNotNull { it.data })
         nextPageTag = list.data?.nextPageTag ?: ""
     }
 
     private fun handleError(failure: Throwable) {
-        isLoading = false
         hideLoading()
-        showSnackBar(failure.message) { loadMore() }
+        showFailed()
+        Toast.makeText(this, failure.message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showSnackBar(message: String?, action: () -> Unit) {
-        message?.let {
-            Snackbar.make(parentLayout, message, Snackbar.LENGTH_INDEFINITE).apply {
-                view.layoutParams = (view.layoutParams as FrameLayout.LayoutParams).apply {
-                    setAction(getString(R.string.try_again)) {
-                        action()
-                    }
-                }
-            }.show()
-        }
+    private fun showFailed() {
+        isFailed = true
+        postAdapter.showFailed()
+    }
+
+    private fun hideFailed() {
+        isFailed = false
+        postAdapter.hideFailed()
     }
 }

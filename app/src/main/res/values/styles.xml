@@ -54,4 +54,9 @@
         <item name="android:minHeight">@dimen/loading_height</item>
         <item name="android:maxHeight">@dimen/loading_height</item>
     </style>
+
+    <style name="TextPostItemFailure">
+        <item name="android:textSize">@dimen/tv_normal</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
