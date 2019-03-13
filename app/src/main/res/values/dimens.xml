@@ -2,9 +2,10 @@
 <resources>
 
     <!-- Spacing -->
-    <dimen name="space_small">8dp</dimen>
-    <dimen name="space_normal">16dp</dimen>
-    <dimen name="space_large">32dp</dimen>
+    <dimen name="space_0_5x">4dp</dimen>
+    <dimen name="space_1x">8dp</dimen>
+    <dimen name="space_2x">16dp</dimen>
+    <dimen name="space_4x">32dp</dimen>
 
     <!-- Text Size -->
     <dimen name="tv_small">10sp</dimen>
@@ -15,9 +16,9 @@
     <dimen name="splash_logo">128dp</dimen>
 
     <!-- Main Screen -->
-    <dimen name="loading_height">@dimen/space_small</dimen>
+    <dimen name="loading_height">@dimen/space_1x</dimen>
 
     <!-- Post Item -->
-    <dimen name="radius_post_item">@dimen/space_small</dimen>
+    <dimen name="radius_post_item">@dimen/space_1x</dimen>
 
 </resources>

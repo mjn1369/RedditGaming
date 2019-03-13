@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/space_normal">
+            android:padding="@dimen/space_2x">
         <TextView
                 android:id="@+id/tvPostItemTitle"
                 android:layout_width="wrap_content"
@@ -22,9 +22,9 @@
                 android:id="@+id/tvPostItemScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_normal"
+                android:layout_marginTop="@dimen/space_2x"
                 android:gravity="left"
-                android:layout_marginRight="@dimen/space_normal"
+                android:layout_marginRight="@dimen/space_2x"
                 style="@style/TextPostItemScore"
                 app:layout_constraintTop_toBottomOf="@+id/tvPostItemTitle"
                 app:layout_constraintLeft_toLeftOf="@+id/tvPostItemTitle"

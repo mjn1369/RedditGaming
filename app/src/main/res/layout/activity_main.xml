@@ -12,7 +12,7 @@
             android:id="@+id/rvPosts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/space_normal"
+            android:layout_margin="@dimen/space_1x"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,6 +27,5 @@
             android:visibility="gone"
             style="@style/HorizontalProgressBar"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

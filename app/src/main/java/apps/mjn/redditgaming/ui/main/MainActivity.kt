@@ -5,15 +5,12 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import apps.mjn.domain.entity.RedditPostItem
-import apps.mjn.domain.entity.RedditPostList
 import apps.mjn.domain.entity.RedditPostListItem
 import apps.mjn.redditgaming.ARG_LIST
 import apps.mjn.redditgaming.R
 import apps.mjn.redditgaming.extension.createViewModel
 import apps.mjn.redditgaming.extension.observe
-import apps.mjn.redditgaming.extension.toRedditPostListItem
 import apps.mjn.redditgaming.ui.base.BaseActivity
 import apps.mjn.redditgaming.ui.main.adapter.PostAdapter
 import apps.mjn.redditgaming.ui.main.adapter.VerticalSpaceItemDecoration
@@ -46,7 +43,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initList() {
-        rvPosts.addItemDecoration(VerticalSpaceItemDecoration(resources.getDimensionPixelSize(R.dimen.space_small)))
+        rvPosts.addItemDecoration(VerticalSpaceItemDecoration(resources.getDimensionPixelSize(R.dimen.space_0_5x)))
         val list = intent.getParcelableExtra(ARG_LIST) as RedditPostListItem?
         rvPosts.adapter = postAdapter
         list?.let { postItem ->
@@ -75,7 +72,7 @@ class MainActivity : BaseActivity() {
         openPostInBrowser(redditPostItem.permanentLink)
     }
 
-    private fun openPostInBrowser(link: String?){
+    private fun openPostInBrowser(link: String?) {
         val https = "https://"
         val http = "http://"
         var finalLink = link
@@ -86,15 +83,15 @@ class MainActivity : BaseActivity() {
             var intent: Intent? = null
             try {
                 intent = Intent(Intent.ACTION_VIEW, Uri.parse(finalLink))
-            } catch (e: Exception){
-                Toast.makeText(this, getString(R.string.link_not_correct) ,Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Toast.makeText(this, getString(R.string.link_not_correct), Toast.LENGTH_LONG).show()
             }
             if (intent?.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             } else {
-                Toast.makeText(this, getString(R.string.browser_not_found) ,Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.browser_not_found), Toast.LENGTH_LONG).show()
             }
-        } ?: Toast.makeText(this, getString(R.string.link_not_found) ,Toast.LENGTH_LONG).show()
+        } ?: Toast.makeText(this, getString(R.string.link_not_found), Toast.LENGTH_LONG).show()
     }
 
     private fun handleStates(resource: Resource<RedditPostListItem>?) {
