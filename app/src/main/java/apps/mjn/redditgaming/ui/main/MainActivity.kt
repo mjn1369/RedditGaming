@@ -20,6 +20,7 @@ import apps.mjn.redditgaming.ui.main.adapter.VerticalSpaceItemDecoration
 import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
+import apps.mjn.redditgaming.util.recyclerview.InfiniteLinearScrollListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,10 +43,13 @@ class MainActivity : BaseActivity() {
         rvPosts.addItemDecoration(VerticalSpaceItemDecoration(resources.getDimensionPixelSize(R.dimen.space_small)))
         val list = intent.getParcelableExtra(ARG_LIST) as RedditPostListItem?
         rvPosts.adapter = postAdapter
-        list?.let {
-            nextPageTag = list.data?.nextPageTag ?: ""
-            addToList(list.data?.posts?.mapNotNull { it.data })
+        list?.let { postItem ->
+            nextPageTag = postItem.data?.nextPageTag ?: ""
+            addToList(postItem.data?.posts?.mapNotNull { it.data })
         } ?: loadData()
+        rvPosts.addOnScrollListener(InfiniteLinearScrollListener(5, rvPosts.layoutManager as LinearLayoutManager){
+            loadMore()
+        })
     }
 
     private fun addToList(items: List<RedditPostItem>?) {
@@ -54,6 +58,11 @@ class MainActivity : BaseActivity() {
 
     private fun loadData() {
         viewModel.load(nextPageTag)
+    }
+
+    private fun loadMore(){
+        showLoading()
+        loadData()
     }
 
     private fun handleStates(resource: Resource<RedditPostListItem>?) {
@@ -66,17 +75,18 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun showLoading(){
+    private fun showLoading() {
         loadingPosts.visibility = View.VISIBLE
     }
 
-    private fun hideLoading(){
+    private fun hideLoading() {
         loadingPosts.visibility = View.GONE
     }
 
     private fun handleSuccess(list: RedditPostListItem) {
         hideLoading()
         addToList(list.data?.posts?.mapNotNull { it.data })
+        nextPageTag = list.data?.nextPageTag ?: ""
     }
 
     private fun handleError(failure: Throwable) {
