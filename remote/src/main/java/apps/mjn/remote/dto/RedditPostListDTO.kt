@@ -11,7 +11,7 @@ data class RedditPostListDataDTO (
     @SerializedName("dist")
     val dist: Int?,
     @SerializedName("children")
-    val children: List<RedditPostContainerDTO>,
+    val children: ArrayList<RedditPostContainerDTO>,
     @SerializedName("after")
     val after: String?
 )

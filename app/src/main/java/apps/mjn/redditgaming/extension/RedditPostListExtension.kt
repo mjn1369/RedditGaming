@@ -10,7 +10,7 @@ fun RedditPostList.toRedditPostListItem() =
 fun RedditPostListData.toRedditPostListDataItem() =
         RedditPostListDataItem(
             childCount,
-            posts.map { it.toRedditPostContainerItem() },
+            posts.map { it.toRedditPostContainerItem() } as ArrayList,
             nextPageTag
         )
 

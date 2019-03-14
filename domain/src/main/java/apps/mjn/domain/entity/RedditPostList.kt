@@ -6,6 +6,6 @@ data class RedditPostList (
 
 data class RedditPostListData (
     val childCount: Int?,
-    val posts: List<RedditPostContainer>,
+    val posts: ArrayList<RedditPostContainer>,
     val nextPageTag: String?
 )

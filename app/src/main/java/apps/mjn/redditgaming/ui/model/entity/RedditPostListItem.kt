@@ -11,6 +11,6 @@ data class RedditPostListItem (
 @Parcelize
 data class RedditPostListDataItem (
     val childCount: Int?,
-    val posts: List<RedditPostContainerItem>,
+    val posts: ArrayList<RedditPostContainerItem>,
     val nextPageTag: String?
 ): Parcelable

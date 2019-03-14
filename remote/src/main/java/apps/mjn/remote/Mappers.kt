@@ -13,7 +13,7 @@ fun RedditPostListDTO.toRedditPostList() =
     RedditPostList(data?.toRedditPostListData())
 
 fun RedditPostListDataDTO.toRedditPostListData() =
-    RedditPostListData(dist, children.map { it.toRedditPostContainer() }, after)
+    RedditPostListData(dist, children.map { it.toRedditPostContainer() } as ArrayList, after)
 
 fun RedditPostContainerDTO.toRedditPostContainer() =
     RedditPostContainer(data?.toRedditPost())
