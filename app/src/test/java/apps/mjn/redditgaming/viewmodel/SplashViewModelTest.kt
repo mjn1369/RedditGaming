@@ -4,9 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import apps.mjn.domain.entity.RedditPostList
 import apps.mjn.domain.failure.Failure
 import apps.mjn.domain.interactor.GetRedditListUseCase
-import apps.mjn.redditgaming.RedditPostListFactory
-import apps.mjn.redditgaming.RedditPostListFactory.Factory.COUNT
 import apps.mjn.redditgaming.extension.toRedditPostListItem
+import apps.mjn.redditgaming.factory.RedditPostListFactory
 import apps.mjn.redditgaming.ui.model.ResourceState
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import io.mockk.*
@@ -44,7 +43,7 @@ class SplashViewModelTest {
         every {
             getRedditListUseCase.execute(any(), capture(success), any())
         } answers {
-            success.invoke(RedditPostListFactory.makeRedditPostList(COUNT))
+            success.invoke(RedditPostListFactory.makeRedditPostList(RedditPostListFactory.COUNT))
         }
 
         viewModel.load()
@@ -53,7 +52,7 @@ class SplashViewModelTest {
 
     @Test
     fun `getRedditListUseCase success and contains data`() {
-        val list: RedditPostList = RedditPostListFactory.makeRedditPostList(COUNT)
+        val list: RedditPostList = RedditPostListFactory.makeRedditPostList(RedditPostListFactory.COUNT)
         val success = slot<(list: RedditPostList) -> Unit>()
 
         every {
@@ -69,7 +68,7 @@ class SplashViewModelTest {
 
     @Test
     fun `getRedditListUseCase success and contains no error`() {
-        val list: RedditPostList = RedditPostListFactory.makeRedditPostList(COUNT)
+        val list: RedditPostList = RedditPostListFactory.makeRedditPostList(RedditPostListFactory.COUNT)
         val success = slot<(list: RedditPostList) -> Unit>()
 
         every {

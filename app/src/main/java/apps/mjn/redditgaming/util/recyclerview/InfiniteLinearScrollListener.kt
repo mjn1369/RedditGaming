@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class InfiniteLinearScrollListener(
     private val visibleThreshold: Int,
-    val layoutManager: LinearLayoutManager,
+    private val layoutManager: LinearLayoutManager,
     private val onLoadMore: () -> Unit
 ) : RecyclerView.OnScrollListener() {
 

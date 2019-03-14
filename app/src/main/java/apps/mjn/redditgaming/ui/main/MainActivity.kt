@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import apps.mjn.domain.entity.RedditPostItem
-import apps.mjn.domain.entity.RedditPostListItem
 import apps.mjn.redditgaming.ARG_LIST
 import apps.mjn.redditgaming.ARG_LIST_POSITION_X
 import apps.mjn.redditgaming.R
@@ -18,6 +16,8 @@ import apps.mjn.redditgaming.ui.main.adapter.PostAdapter
 import apps.mjn.redditgaming.ui.main.adapter.VerticalSpaceItemDecoration
 import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
+import apps.mjn.redditgaming.ui.model.entity.RedditPostItem
+import apps.mjn.redditgaming.ui.model.entity.RedditPostListItem
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import apps.mjn.redditgaming.util.recyclerview.InfiniteLinearScrollListener
 import kotlinx.android.synthetic.main.activity_main.*
@@ -134,7 +134,7 @@ class MainActivity : BaseActivity() {
         hideLoading()
         addToList(list.data?.posts?.mapNotNull { it.data })
         nextPageTag = list.data?.nextPageTag ?: ""
-        if(nextPageTag.isNullOrEmpty()){
+        if(nextPageTag.isEmpty()){
             rvPosts.clearOnScrollListeners()
         }
         list.data?.posts?.let { redditPostListItem.data?.posts?.addAll(it) }

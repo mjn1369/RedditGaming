@@ -3,8 +3,8 @@ package apps.mjn.redditgaming.ui.main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import apps.mjn.domain.entity.RedditPostItem
 import apps.mjn.redditgaming.R
+import apps.mjn.redditgaming.ui.model.entity.RedditPostItem
 
 class PostAdapter(
     private var postItems: ArrayList<RedditPostItem?>,

@@ -3,7 +3,6 @@ package apps.mjn.redditgaming.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
-import apps.mjn.domain.entity.RedditPostListItem
 import apps.mjn.redditgaming.ARG_LIST
 import apps.mjn.redditgaming.R
 import apps.mjn.redditgaming.extension.createViewModel
@@ -12,6 +11,7 @@ import apps.mjn.redditgaming.ui.base.BaseActivity
 import apps.mjn.redditgaming.ui.main.MainActivity
 import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
+import apps.mjn.redditgaming.ui.model.entity.RedditPostListItem
 import apps.mjn.redditgaming.ui.viewmodel.GamingListViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_splash.*

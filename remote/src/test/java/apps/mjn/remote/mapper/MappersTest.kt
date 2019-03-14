@@ -17,10 +17,10 @@ class MappersTest {
         val redditPostListDTO: RedditPostListDTO = RedditPostListFactory.makeRedditPostListDTO(COUNT)
         val redditPostList: RedditPostList = redditPostListDTO.toRedditPostList()
 
-        Assert.assertEquals(redditPostListDTO.data.toRedditPostListData(), redditPostList.data)
-        Assert.assertEquals(redditPostListDTO.data.after, redditPostList.data.nextPageTag)
-        Assert.assertEquals(redditPostListDTO.data.dist, redditPostList.data.childCount)
-        Assert.assertEquals(redditPostListDTO.data.children.map { it.toRedditPostContainer() }, redditPostList.data.posts)
+        Assert.assertEquals(redditPostListDTO.data?.toRedditPostListData(), redditPostList.data)
+        Assert.assertEquals(redditPostListDTO.data?.after, redditPostList.data?.nextPageTag)
+        Assert.assertEquals(redditPostListDTO.data?.dist, redditPostList.data?.childCount)
+        Assert.assertEquals(redditPostListDTO.data?.children?.map { it.toRedditPostContainer() }, redditPostList.data?.posts)
     }
 
 }

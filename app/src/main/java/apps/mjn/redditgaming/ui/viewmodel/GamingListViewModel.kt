@@ -3,12 +3,12 @@ package apps.mjn.redditgaming.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import apps.mjn.domain.entity.RedditPostList
-import apps.mjn.domain.entity.RedditPostListItem
 import apps.mjn.domain.interactor.GetRedditListUseCase
 import apps.mjn.redditgaming.extension.toRedditPostListItem
 import apps.mjn.redditgaming.ui.base.BaseViewModel
 import apps.mjn.redditgaming.ui.model.Resource
 import apps.mjn.redditgaming.ui.model.ResourceState
+import apps.mjn.redditgaming.ui.model.entity.RedditPostListItem
 import javax.inject.Inject
 
 class GamingListViewModel @Inject constructor(private val getRedditListUseCase: GetRedditListUseCase) :

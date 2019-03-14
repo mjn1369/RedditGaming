@@ -6,18 +6,13 @@
 	<dimen name="space_1x">6dp</dimen>
 	<dimen name="space_2x">12dp</dimen>
 	<dimen name="space_3x">18dp</dimen>
-	<dimen name="space_4x">24dp</dimen>
 
 	<!-- Text Size -->
-	<dimen name="tv_small">7sp</dimen>
 	<dimen name="tv_normal">9sp</dimen>
 	<dimen name="tv_large">13sp</dimen>
 
 	<!-- Splash Screen -->
 	<dimen name="splash_logo">96dp</dimen>
-
-	<!-- Main Screen -->
-	<dimen name="loading_height">@dimen/space_1x</dimen>
 
 	<!-- Post Item -->
 	<dimen name="radius_post_item">@dimen/space_1x</dimen>

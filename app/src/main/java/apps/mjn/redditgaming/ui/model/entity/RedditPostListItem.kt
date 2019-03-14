@@ -1,4 +1,4 @@
-package apps.mjn.domain.entity
+package apps.mjn.redditgaming.ui.model.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

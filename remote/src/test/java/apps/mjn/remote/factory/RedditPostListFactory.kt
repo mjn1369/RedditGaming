@@ -14,11 +14,11 @@ import apps.mjn.remote.dto.RedditPostListDataDTO
 internal class RedditPostListFactory {
 
     companion object Factory {
-        const val AFTER = ""
+        private const val AFTER = ""
         const val COUNT = 25
 
         fun makeRedditPostList(postCount: Int): RedditPostList {
-            val postContainers = mutableListOf<RedditPostContainer>()
+            val postContainers = ArrayList<RedditPostContainer>()
             repeat(postCount) {
                 postContainers.add(makePostContainer())
             }
@@ -26,18 +26,18 @@ internal class RedditPostListFactory {
         }
 
         fun makeRedditPostListDTO(postCount: Int): RedditPostListDTO {
-            val postContainers = mutableListOf<RedditPostContainerDTO>()
+            val postContainers = ArrayList<RedditPostContainerDTO>()
             repeat(postCount) {
                 postContainers.add(makePostContainerDTO())
             }
             return RedditPostListDTO(makePostListDataDTO(COUNT, postContainers, AFTER))
         }
 
-        private fun makePostListData(dist: Int, children: List<RedditPostContainer>, after: String) = RedditPostListData(
+        private fun makePostListData(dist: Int, children: ArrayList<RedditPostContainer>, after: String) = RedditPostListData(
             dist, children, after
         )
 
-        private fun makePostListDataDTO(dist: Int, children: List<RedditPostContainerDTO>, after: String) = RedditPostListDataDTO(
+        private fun makePostListDataDTO(dist: Int, children: ArrayList<RedditPostContainerDTO>, after: String) = RedditPostListDataDTO(
             dist, children, after
         )
 
