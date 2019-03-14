@@ -134,6 +134,9 @@ class MainActivity : BaseActivity() {
         hideLoading()
         addToList(list.data?.posts?.mapNotNull { it.data })
         nextPageTag = list.data?.nextPageTag ?: ""
+        if(nextPageTag.isNullOrEmpty()){
+            rvPosts.clearOnScrollListeners()
+        }
         list.data?.posts?.let { redditPostListItem.data?.posts?.addAll(it) }
     }
 
