@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Spacing -->
+	<dimen name="space_0_5x">2dp</dimen>
+	<dimen name="space_1x">4dp</dimen>
+	<dimen name="space_2x">8dp</dimen>
+	<dimen name="space_3x">12dp</dimen>
+	<dimen name="space_4x">16dp</dimen>
+
+	<!-- Text Size -->
+	<dimen name="tv_small">5sp</dimen>
+	<dimen name="tv_normal">7sp</dimen>
+	<dimen name="tv_large">9sp</dimen>
+
+	<!-- Splash Screen -->
+	<dimen name="splash_logo">64dp</dimen>
+
+	<!-- Main Screen -->
+	<dimen name="loading_height">@dimen/space_1x</dimen>
+
+	<!-- Post Item -->
+	<dimen name="radius_post_item">@dimen/space_1x</dimen>
+	<dimen name="loading_post_item">@dimen/space_3x</dimen>
+
+</resources>
